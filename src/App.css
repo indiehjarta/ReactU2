@@ -74,3 +74,12 @@ li {
 input {
     width: 100%;
 }
+
+/* NAVBAR */
+
+.nav-bar {
+    width: 200px;
+    height: 100vh;
+    background-color:#007BFF;
+    position: absolute;
+}

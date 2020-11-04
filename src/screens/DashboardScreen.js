@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import DashboardComponent from '../components/DashboardComponent';
 
 class DashboardScreen extends Component {
     render() {
         return (
-            <div>
-                
-            </div>
+            <DashboardComponent />
         )
     }
 };

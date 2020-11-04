@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react'
+import Wrapper from '../components/WrapperComponent';
 
-class UserScreen extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
-};
+const UserScreen = () => {
+    return (
+        <div className='dashboard'>
+            <Wrapper>
+                <h1>A user</h1>
+            </Wrapper>
+        </div>
+    )
+}
 
-export default UserScreen;
+export default UserScreen

@@ -26,12 +26,7 @@ class WrapperComponent extends Component {
     render () {
         return (
             <div className={styles.card}>
-                {this.state.showContent && this.props.children}
-                <hr />
-                <button 
-                    className={styles.button} onClick={this.toggleContent}> 
-                        {this.state.showContent ? 'Hide content' : 'Show content'}
-                </button>
+                {this.props.children}
             </div>
         );
     };
