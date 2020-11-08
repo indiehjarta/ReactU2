@@ -8,7 +8,12 @@ import React from 'react';
 const UserComponent = ({ user, color }) => {
     return (
         <div>
-            <li key={user} style={{color: color}}> {user} </li>
+            <li 
+            className='user-list'
+            key={user} 
+            style={{color: color}}> 
+                {user} 
+            </li>
         </div>
     );
 }
