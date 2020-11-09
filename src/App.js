@@ -19,6 +19,7 @@ function App() {
           <Route path='/login' component={LoginScreen} />
           <Route path='/dashboard' component={DashboardScreen} />
           <Route path='/user' component={UserScreen} />
+          <Route path='/user/:id' component={UserScreen} />
         </Switch>
       </Router>
   );

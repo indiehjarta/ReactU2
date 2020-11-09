@@ -67,6 +67,10 @@ input {
     margin-bottom: 6px;
 }
 
+a {
+    text-decoration: none;
+}
+
 li {
     list-style-type: none;
     cursor: pointer;
