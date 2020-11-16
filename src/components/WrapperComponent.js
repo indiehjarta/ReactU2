@@ -2,7 +2,7 @@
   * This component works like a wrapper for the cards. 
   * The content in the cards renders from DashboardComponent.
   * WrapperComponent have it owns CSS module.
-  * Contains a button for toggle state. If state is true, show content. If false, hide content.
+  * Contains a button for toggle state. If state is true, show content. If false, hide content. (tar bort detta enligt Film 2)
   */
 
 import React, { Component } from 'react';
@@ -16,7 +16,7 @@ class WrapperComponent extends Component {
         this.toggleContent = this.toggleContent.bind(this);
     };
 
-    // Function changes the state between true/false (show and hide)
+    // Function changes the state between true/false (show and hide) (tar bort detta enligt Film 2)
     toggleContent = () => {
         this.setState({
             showContent : !this.state.showContent

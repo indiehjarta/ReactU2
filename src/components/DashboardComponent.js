@@ -94,7 +94,19 @@ class DashboardComponent extends Component {
                 <WrapperComponent>
                     <input
                         type='text'
-                        placeholder='New user....'
+                        placeholder='Name....'
+                        value={this.state.value}
+                        onChange={this.handleInput}
+                    />
+                    <input
+                        type='text'
+                        placeholder='Username....'
+                        value={this.state.value}
+                        onChange={this.handleInput}
+                    />
+                    <input
+                        type='text'
+                        placeholder='E-mail....'
                         value={this.state.value}
                         onChange={this.handleInput}
                     />

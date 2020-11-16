@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+// import { useHistory } from 'react-router-dom';
 import Wrapper from '../components/WrapperComponent';
 
 class LoginScreen extends Component {
+    // static propTypes = {
+    //     history: PropTypes.object.isRequired
+    // };
+
     render() {
         return (
             <div className='dashboard'>
