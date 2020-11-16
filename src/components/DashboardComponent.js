@@ -12,15 +12,31 @@ class DashboardComponent extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            users: ['Fluttershy', 'Pinkie Pie', 'Rainbow Dash', 'Applejack'],
+            users: [],
             color: '#994ea6',
-            value: ['']
+            value: [''],
+            error: null
         };
 
         // These bindings are necessary to make `this` work in the callback
         this.addUser = this.addUser.bind(this);
         this.removeUser = this.removeUser.bind(this);
         this.toggleColor = this.toggleColor.bind(this);
+    }
+
+    fetchUsers() {
+        fetch(`https://jsonplaceholder.typicode.com/users`)
+            .then(response => response.json())
+            .then(data =>
+                this.setState({
+                    users: data
+                })
+            )
+            .catch(error => this.setState({ error }));
+    }
+
+    componentDidMount() {
+        this.fetchUsers();
     }
 
     // Controls and changes (with onChange-button) the value of the input field
@@ -34,8 +50,6 @@ class DashboardComponent extends Component {
      * Adds a user from input field by merging two arrays 
      * (value from input and users) with .concat(method) and 
      * creates a new array.
-     * 
-     * "Could used .push() here but I really wanted to try .concat() method in this case"
      */
     addUser = () => {
         let user = this.state.users.concat(this.state.value);
@@ -69,7 +83,7 @@ class DashboardComponent extends Component {
                         {this.state.users.map(user => (
                             <UserComponent 
                                 user={user}
-                                key={user}
+                                key={user.id}
                                 color={this.state.color}
                             />
                         ))}
@@ -82,8 +96,8 @@ class DashboardComponent extends Component {
                         type='text'
                         placeholder='New user....'
                         value={this.state.value}
-                        onChange={this.handleInput}>
-                    </input>
+                        onChange={this.handleInput}
+                    />
 
                     <button onClick={this.addUser} className='add-btn' type='submit'>Add</button>
                     <button onClick={this.removeUser} className='remove-btn'>Remove</button>

@@ -6,7 +6,14 @@ class LoginScreen extends Component {
         return (
             <div className='dashboard'>
                 <Wrapper>
-                    <h1>This is Login</h1>
+                    <div className='login'>
+                        <input
+                            type='text'
+                            placeholder='New user....'
+                        />
+                        <button className='login-btn'>Login</button>
+                    </div>
+                    <button>Show info</button>
                 </Wrapper>
             </div>
         )
