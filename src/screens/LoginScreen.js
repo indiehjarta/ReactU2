@@ -3,9 +3,22 @@ import React, { Component } from 'react';
 import Wrapper from '../components/WrapperComponent';
 
 class LoginScreen extends Component {
+    constructor() {
+        super();
+        this.state = { showContent: false };
+        
+        this.toggleContent = this.toggleContent.bind(this);
+    }
+
     // static propTypes = {
     //     history: PropTypes.object.isRequired
     // };
+
+    toggleContent = () => {
+        this.setState({
+            showContent: !this.state.showContent
+        })
+    };
 
     render() {
         return (
@@ -18,7 +31,9 @@ class LoginScreen extends Component {
                         />
                         <button className='login-btn'>Login</button>
                     </div>
-                    <button>Show info</button>
+                    <button onClick={this.toggleContent}>
+                        {this.state.showContent ? 'Hide content' : 'Show content'}
+                    </button>
                 </Wrapper>
             </div>
         )

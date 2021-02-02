@@ -4,7 +4,7 @@
  * Contains buttons to add, remove and toggle.
  */
 
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import WrapperComponent from './WrapperComponent';
 import UserComponent from './UserComponent';
 
@@ -15,13 +15,26 @@ class DashboardComponent extends Component {
             users: [],
             color: '#994ea6',
             value: [''],
-            error: null
+            error: null,
+
+            name: '',
+            username: '',
+            email: '',
+
+            newUser: {
+                name: '',
+                username: '',
+                email: ''
+            }
         };
+
+        this.newUser = createRef();
 
         // These bindings are necessary to make `this` work in the callback
         this.addUser = this.addUser.bind(this);
         this.removeUser = this.removeUser.bind(this);
         this.toggleColor = this.toggleColor.bind(this);
+        this.handleInput = this.handleInput.bind(this);
     }
 
     fetchUsers() {
@@ -41,9 +54,13 @@ class DashboardComponent extends Component {
 
     // Controls and changes (with onChange-button) the value of the input field
     handleInput = (e) => {
+        const value = e.target.value;
         this.setState({
-            value: e.target.value
-        })
+            ...this.state,
+            [e.target.name]: value
+        });
+        // jag kanske ska fixa nån funktion som skapar ett object, från inputs
+        console.log(e.target.value);
     };
 
     /**
@@ -52,11 +69,24 @@ class DashboardComponent extends Component {
      * creates a new array.
      */
     addUser = () => {
-        let user = this.state.users.concat(this.state.value);
-        this.setState({
-            users: user,
-            value: ['']
-        })
+        
+        if (this.newUser.current.value) {
+            let user = this.state.users.concat(
+                [],
+                // den får ett id här, så på nåt sätt så funkar det.... jag kanske ska ha username och mail här med?
+                // kan prova ta bort de 
+                { id: this.state.users.length + 1, name: this.newUser.current.value });
+            this.setState({ users: user });
+
+            this.newUser.current.value = '';
+        }
+        console.log(this.newUser)
+
+        // let user = this.state.users.concat(this.state.value);
+        // this.setState({
+        //     users: user,
+        //     value: ['']
+        // })
     }
 
     // Removes a user from the array
@@ -74,8 +104,21 @@ class DashboardComponent extends Component {
             color: '#994ea6'
         });
     };
+    
 
-    render () {
+    render() {
+        // Fake API
+        // const newUser = {
+        //     name: this.state.name,
+        //     username: this.state.username,
+        //     email: this.state.email,
+        //     address: {
+        //         city: 'Mock City',
+        //         street: 'Mock Street 12',
+        //         suite: 'Mock Suite'
+        //     }
+        // };
+
         return (
             <div className='dashboard'>
                 <WrapperComponent>
@@ -94,20 +137,26 @@ class DashboardComponent extends Component {
                 <WrapperComponent>
                     <input
                         type='text'
+                        name='name'
+                        ref={this.newUser}
+                        value={this.state.name}
                         placeholder='Name....'
-                        value={this.state.value}
                         onChange={this.handleInput}
                     />
                     <input
                         type='text'
+                        name='username'
+                        ref={this.newUser}
+                        value={this.state.username}
                         placeholder='Username....'
-                        value={this.state.value}
                         onChange={this.handleInput}
                     />
                     <input
                         type='text'
+                        name='email'
+                        ref={this.newUser}
+                        value={this.state.email}
                         placeholder='E-mail....'
-                        value={this.state.value}
                         onChange={this.handleInput}
                     />
 
