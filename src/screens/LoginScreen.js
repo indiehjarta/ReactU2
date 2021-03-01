@@ -1,43 +1,49 @@
 import React, { Component } from 'react';
-// import { useHistory } from 'react-router-dom';
 import Wrapper from '../components/WrapperComponent';
+import PropTypes from 'prop-types';
+
 
 class LoginScreen extends Component {
-    constructor() {
-        super();
-        this.state = { showContent: false };
-        
-        this.toggleContent = this.toggleContent.bind(this);
+    static propTypes = {
+        value: PropTypes.string,
+        history: PropTypes.object.isRequired
     }
 
-    // static propTypes = {
-    //     history: PropTypes.object.isRequired
-    // };
+	constructor(props) {
+		super(props)
+		this.state = {
+			value: '',
+		}
+	}
 
-    toggleContent = () => {
-        this.setState({
-            showContent: !this.state.showContent
-        })
+	handleInput = (e) => {
+        this.setState({ value: e.target.value })
     };
 
-    render() {
-        return (
-            <div className='dashboard'>
-                <Wrapper>
-                    <div className='login'>
-                        <input
-                            type='text'
-                            placeholder='New user....'
-                        />
-                        <button className='login-btn'>Login</button>
-                    </div>
-                    <button onClick={this.toggleContent}>
-                        {this.state.showContent ? 'Hide content' : 'Show content'}
+	navigateDashboard = () => {
+		if (this.state.value.length > 9) {
+		 	return this.props.history.push('/dashboard')
+        } return alert('Oopsie doopsie! You need 10 characters or more to login')
+	};
+
+	render() {
+		return (
+			<div className='dashboard'>
+                <Wrapper loginInfo='Your username should be 10 characters long or more to login'>
+					<input 
+                        value={this.state.value}
+                        type='text'
+                        placeholder='New user...'
+                        onChange={this.handleInput}
+                    />
+                    <button
+						onClick={this.navigateDashboard}
+                        className='login-btn'>Login
                     </button>
-                </Wrapper>
-            </div>
-        )
-    }
-};
+				</Wrapper>
+			</div>
+		);
+	}
+}
 
 export default LoginScreen;

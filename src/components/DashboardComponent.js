@@ -15,17 +15,7 @@ class DashboardComponent extends Component {
             users: [],
             color: '#994ea6',
             value: [''],
-            error: null,
-
-            name: '',
-            username: '',
-            email: '',
-
-            newUser: {
-                name: '',
-                username: '',
-                email: ''
-            }
+            error: null
         };
 
         this.newUser = createRef();
@@ -59,8 +49,6 @@ class DashboardComponent extends Component {
             ...this.state,
             [e.target.name]: value
         });
-        // jag kanske ska fixa nån funktion som skapar ett object, från inputs
-        console.log(e.target.value);
     };
 
     /**
@@ -69,24 +57,14 @@ class DashboardComponent extends Component {
      * creates a new array.
      */
     addUser = () => {
-        
         if (this.newUser.current.value) {
             let user = this.state.users.concat(
                 [],
-                // den får ett id här, så på nåt sätt så funkar det.... jag kanske ska ha username och mail här med?
-                // kan prova ta bort de 
                 { id: this.state.users.length + 1, name: this.newUser.current.value });
             this.setState({ users: user });
 
             this.newUser.current.value = '';
         }
-        console.log(this.newUser)
-
-        // let user = this.state.users.concat(this.state.value);
-        // this.setState({
-        //     users: user,
-        //     value: ['']
-        // })
     }
 
     // Removes a user from the array
@@ -143,23 +121,6 @@ class DashboardComponent extends Component {
                         placeholder='Name....'
                         onChange={this.handleInput}
                     />
-                    <input
-                        type='text'
-                        name='username'
-                        ref={this.newUser}
-                        value={this.state.username}
-                        placeholder='Username....'
-                        onChange={this.handleInput}
-                    />
-                    <input
-                        type='text'
-                        name='email'
-                        ref={this.newUser}
-                        value={this.state.email}
-                        placeholder='E-mail....'
-                        onChange={this.handleInput}
-                    />
-
                     <button onClick={this.addUser} className='add-btn' type='submit'>Add</button>
                     <button onClick={this.removeUser} className='remove-btn'>Remove</button>
                 </WrapperComponent>
